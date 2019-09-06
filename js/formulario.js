@@ -1,8 +1,10 @@
 // Recorrer los elementos y hacer que onchange ejecute una funcion para comprobar el valor de ese input
 (function(){
-
+ // formulario y elementos del formulario
 var formulario = document.formulario_registro,
 	elementos = formulario.elements;
+// lista global de registros
+let registros = [];
 
 // Funcion que se ejecuta cuando el evento click es activado
 
@@ -101,8 +103,46 @@ var enviar = function(e){
 	} else {
 		console.log('Envia');
 		e.preventDefault();
+		let registro = obtenerDatos();
+		registros.push(registro)
+        localStorage.setItem("lista_automotores", JSON.stringify(registros))
+		console.log(registros);
 	}
 };
+
+// Agregar todos los campos al nuevo registro
+function obtenerDatos() {
+    // Obteniendo los valores de los campos
+    let nombre = document.getElementById('nombre').value;
+    let apellido = document.getElementById('apellido').value;
+    let usuario = document.getElementById('usuario').value;
+    let correo = document.getElementById('correo').value;
+    let pass = document.getElementById('pass').value;
+    let pass2 = document.getElementById('pass2').value;
+	let hombre = document.getElementById('hombre').value;
+    let mujer = document.getElementById('mujer').value;
+    let terminos = document.getElementById('hombre').value;
+	
+
+    // Crear el objeto de modelo
+    let registro = {}
+    registro.nombre = nombre
+    registro.apellido = apellido
+    registro.usuario = usuario
+    registro.correo = correo
+    registro.pass = pass
+    registro.pass2 = pass2
+	registro.hombre = hombre
+    registro.mujer = mujer
+    registro.terminos = terminos
+	
+
+    // Formas de imprimir
+    //console.log(`El objeto automotor es: ${automotor}`);
+    //console.log('El objeto automotor es:' + automotor);
+    console.log('El objeto registro es:', registro);
+    return registro
+}
 
 var focusInput = function(){
 	this.parentElement.children[1].className = "label active";
@@ -126,4 +166,21 @@ for (var i = 0; i < elementos.length; i++) {
 	}
 }
 
+
+
 }())
+
+function inicioSesion(usuario, contrasena) {
+	for (let i = 0; i < registros.length; i++) {
+		
+		if (usuario == registros[i].usuario) {
+			if (contrasena == registros[i].usuario){
+				alert('Has iniciado sesión correctamente');
+				break;
+			}else{
+				alert('Usuario o contraseña incorrectos');
+			}
+		}
+	}	
+}
+
