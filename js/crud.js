@@ -26,28 +26,50 @@ function mostrarBoton() {
 
 function agregarBoton() {
 var html = `   
-<center>
-			
+<div class="wrap">
+			<form action="" class="formulario" name="formulario_registro" method="get">
+				<div>
+					<div class="input-group">
+						<input type="text" id="nombre" name="nombre">
+						<label class="label" for="nombre">Nombre:</label>
+					</div>
+					<div class="input-group">
+						<input type="text" id="apellido" name="apellido">
+						<label class="label" for="apellido">Apellido:</label>
+					</div>
 
-            <input name="txtUsuario" id="txtUsuario" required="required" type="text" placeholder="Usuario">
-                <br>
-                <input name="txtContrasena" id="txtContrasena" required="required" type="password" placeholder="contraseña">
-                <br>
-                <input name="txtNombre" id="txtNombre" required="required" type="text" placeholder="Nombre">
-                <br>
-                <input name="txtCorreo" id="txtCorreo" required="required" type="text" placeholder="Correo">
-                <br>
-                <div class="input-group radio" style="color:black">
-						<input name="sexo" id="hombre" type="radio" value="Hombre">
+					<div class="input-group">
+						<input type="text" id="usuario" name="usuario">
+						<label class="label" for="usuario">Nombre De Usario:</label>
+					</div>
+					<div class="input-group">
+						<input type="email" id="correo" name="correo">
+						<label class="label" for="correo">Correo:</label>
+					</div>
+
+					<div class="input-group">
+						<input type="password" id="pass" name="pass">
+						<label class="label" for="pass">Contraseña:</label>
+					</div>
+					<div class="input-group">
+						<input type="password" id="pass2" name="pass2">
+						<label class="label" for="pass2">Repetir Contraseña:</label>
+					</div>
+					<div class="input-group radio">
+						<input type="radio" name="sexo" id="hombre" value="Hombre">
 						<label for="hombre">Hombre</label>
-						<input name="sexo" id="mujer" type="radio" value="Mujer">
+						<input type="radio" name="sexo" id="mujer" value="Mujer">
 						<label for="mujer">Mujer</label>
-                    </div>
-                <br>
-                <input id="btn-submit" type="submit" value="Enviar">
-                <br>
-                <input id="btn-submit" onclick="volver()" type="submit" value="Volver">
-                </center>
+					</div>
+					<div class="input-group checkbox">
+						<input type="checkbox" name="terminos" id="terminos" value="true">
+						<label for="terminos">Acepto los Terminos y Condiciones</label>
+					</div>
+						
+					<input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
+				</div>
+			</form>
+		</div>
 `;
 document.getElementById("contenedor-formulario").innerHTML = html;
 }
@@ -93,7 +115,38 @@ function buscador(params) {
     }
 }
 function agregar() {
-    
 
-    
+ if(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == ""){
+
+    alert("Por favor, llene todos los campos")
+
+ }else{
+    if (document.getElementById("pass").value != document.getElementById("pass2").value) {
+        alert("la contraseña no es igual")
+    } else {
+        var usuario = {
+            nombre = document.getElementById("nombre").value,
+            apellido = document.getElementById("apellido").value,
+            usuario = document.getElementById("usuario").value,
+            correo = document.getElementById("correo").value,
+            pass = document.getElementById("pass").value
+        }
+        //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
+        localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+    }
+ }
+
+}
+function contarUsuarios() {
+    var contador = 0;
+    var index = true;
+    while(index){
+        try {
+            localStorage.getItem(`usuario${contador}`)
+        } catch (error) {
+            index = false
+        }
+        
+    }
+    return contador;
 }
