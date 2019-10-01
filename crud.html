@@ -14,11 +14,11 @@
 	<link href="css/estilos.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-
+	<script type="text/javascript" src="js/crud.js"></script>
 	<div class="principal"><img src="imagenes/logoUdeM.png"></div>    
     <header class="container">        
         <nav>
-			<a href="index.html" class="item-options">Inicio</a>
+			<a href="index.html"  class="item-options">Inicio</a>
 			<a href="convenios.html" class="item-options">convenios</a>
 			<a href="documentos.html" class="item-options">Documentos</a>
 			<a href="videos.html" class="item-options">Videos</a>
@@ -29,18 +29,23 @@
     </header>	
 	
 
-    <div class="contenedor-formulario">
+    <div class="contenedor-formulario" id="contenedor-formulario">
 		<div class="wrap">
 			<form action="" class="formulario" name="formulario_registro" method="get">
 				<div>
 					
-					
-                    <input type="submit" id="btn-Editar" value="Editar">
-                    <input type="submit" id="btn-Eliminar" value="Eliminar">
-                    <input type="submit" id="btn-Mostrar" value="Mostrar">
+					<input type="submit" id="btn-Agregar" onclick="agregarBoton()" value="Agregar">
+                    <input type="submit" id="btn-Editar" onclick="buscador()" value="Editar/Eliminar">
+                    
+                    <input type="submit" id="btn-Mostrar" onclick="mostrarBoton()" value="Mostrar">
 				</div>
 			</form>
 		</div>
+	</div>
+
+	<div class="contenedor-agregar">
+			
+
 	</div>
 	
 	<footer>
