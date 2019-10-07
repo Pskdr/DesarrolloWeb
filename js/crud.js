@@ -66,7 +66,9 @@ var html = `
 						<label for="terminos">Acepto los Terminos y Condiciones</label>
 					</div>
 						
-					<input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
+                    <input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
+                    <br>
+                    <input id="btn-submit" onclick="volver()" type="submit" value="Volver">
 				</div>
 			</form>
 		</div>
@@ -122,14 +124,14 @@ function agregar() {
 
  }else{
     if (document.getElementById("pass").value != document.getElementById("pass2").value) {
-        alert("la contraseña no es igual")
+        alert("las contraseñas no son iguales")
     } else {
         var usuario = {
-            nombre = document.getElementById("nombre").value,
-            apellido = document.getElementById("apellido").value,
-            usuario = document.getElementById("usuario").value,
-            correo = document.getElementById("correo").value,
-            pass = document.getElementById("pass").value
+            nombre : document.getElementById("nombre").value,
+            apellido : document.getElementById("apellido").value,
+            usuario : document.getElementById("usuario").value,
+            correo : document.getElementById("correo").value,
+            pass : document.getElementById("pass").value
         }
         //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
         localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
