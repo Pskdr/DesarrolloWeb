@@ -25,6 +25,8 @@ function mostrarBoton() {
 }
 
 function agregarBoton() {
+
+
 var html = `   
 <div class="wrap">
 			<form action="" class="formulario" name="formulario_registro" method="get">
@@ -74,6 +76,27 @@ var html = `
 		</div>
 `;
 document.getElementById("contenedor-formulario").innerHTML = html;
+var focusInput = function(){
+	this.parentElement.children[1].className = "label active";
+	this.parentElement.children[0].className = this.parentElement.children[0].className.replace("error", "");
+};
+
+var blurInput = function(){
+	if (this.value <= 0) {
+		this.parentElement.children[1].className = "label";
+		this.parentElement.children[0].className = this.parentElement.children[0].className + " error";
+	}
+};
+
+// --- Eventos ---
+formulario.addEventListener("submit", enviar);
+
+for (var i = 0; i < elementos.length; i++) {
+	if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
+		elementos[i].addEventListener("focus", focusInput);
+		elementos[i].addEventListener("blur", blurInput);
+	}
+}
 }
 function volver() {
     var html = `<div class="wrap">
@@ -117,26 +140,31 @@ function buscador(params) {
     }
 }
 function agregar() {
+    if(validarPrevia()){
+        if(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == ""){
 
- if(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == ""){
+            alert("Por favor, llene todos los campos")
 
-    alert("Por favor, llene todos los campos")
-
- }else{
-    if (document.getElementById("pass").value != document.getElementById("pass2").value) {
-        alert("las contraseñas no son iguales")
-    } else {
-        var usuario = {
-            nombre : document.getElementById("nombre").value,
-            apellido : document.getElementById("apellido").value,
-            usuario : document.getElementById("usuario").value,
-            correo : document.getElementById("correo").value,
-            pass : document.getElementById("pass").value
+        }else{
+            if (document.getElementById("pass").value != document.getElementById("pass2").value) {
+                alert("las contraseñas no son iguales")
+            } else {
+                var usuario = {
+                    nombre : document.getElementById("nombre").value,
+                    apellido : document.getElementById("apellido").value,
+                    usuario : document.getElementById("usuario").value,
+                    correo : document.getElementById("correo").value,
+                    pass : document.getElementById("pass").value
+                }
+                //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
+                localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+            }
         }
-        //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
-        localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+
+    }else{
+        alert("Ese correo ya existe mi fai")
     }
- }
+            
 
 }
 function contarUsuarios() {
@@ -175,3 +203,26 @@ function mostrarUsuarios(){
 
 
 }
+function validarPrevia(correo) {
+    if(contarUsuarios()==0){
+        return true;
+    }else{
+        var contador =0;
+       var index = true;
+        while(index){
+            try {
+                if(json.parse(localStorage.getItem(`usuario${contador}`)).correo == correo){
+                    return false
+                    
+                }
+                contador++
+            } catch (error) {
+                index = false
+                return true
+            }
+            
+        }
+    }
+    
+}
+
