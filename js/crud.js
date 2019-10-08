@@ -145,10 +145,33 @@ function contarUsuarios() {
     while(index){
         try {
             localStorage.getItem(`usuario${contador}`)
+            contador++
         } catch (error) {
             index = false
+            return contador
         }
         
     }
     return contador;
+}
+
+function mostrarUsuarios(){
+    if(contadorUsuarios() == 0){
+        alert("No se encuentran usuarios para mostrar")
+    }else{
+        var contador =0;
+        var usuarios = []
+        while(index){
+            try {
+                usuarios [contador] = json.parse(localStorage.getItem(`usuario${contador}`))
+                contador++
+            } catch (error) {
+                index = false
+                return contador
+            }
+            
+        }
+    }
+
+
 }
