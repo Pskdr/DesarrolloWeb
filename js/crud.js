@@ -27,79 +27,35 @@ function mostrarBoton() {
 function agregarBoton() {
 
 
-var html = `   
-<div class="wrap">
-			<form action="" class="formulario" name="formulario_registro" method="get">
-				<div>
-					<div class="input-group">
-						<input type="text" id="nombre" name="nombre">
-						<label class="label" for="nombre">Nombre:</label>
-					</div>
-					<div class="input-group">
-						<input type="text" id="apellido" name="apellido">
-						<label class="label" for="apellido">Apellido:</label>
-					</div>
-
-					<div class="input-group">
-						<input type="text" id="usuario" name="usuario">
-						<label class="label" for="usuario">Nombre De Usario:</label>
-					</div>
-					<div class="input-group">
-						<input type="email" id="correo" name="correo">
-						<label class="label" for="correo">Correo:</label>
-					</div>
-
-					<div class="input-group">
-						<input type="password" id="pass" name="pass">
-						<label class="label" for="pass">Contraseña:</label>
-					</div>
-					<div class="input-group">
-						<input type="password" id="pass2" name="pass2">
-						<label class="label" for="pass2">Repetir Contraseña:</label>
-					</div>
-					<div class="input-group radio">
-						<input type="radio" name="sexo" id="hombre" value="Hombre">
-						<label for="hombre">Hombre</label>
-						<input type="radio" name="sexo" id="mujer" value="Mujer">
-						<label for="mujer">Mujer</label>
-					</div>
-					<div class="input-group checkbox">
-						<input type="checkbox" name="terminos" id="terminos" value="true">
-						<label for="terminos">Acepto los Terminos y Condiciones</label>
-					</div>
-						
-                    <input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
-                    <br>
-                    <input id="btn-submit" onclick="volver()" type="submit" value="Volver">
-				</div>
-			</form>
-		</div>
-`;
-document.getElementById("contenedor-formulario").innerHTML = html;
-var focusInput = function(){
-	this.parentElement.children[1].className = "label active";
-	this.parentElement.children[0].className = this.parentElement.children[0].className.replace("error", "");
-};
-
-var blurInput = function(){
-	if (this.value <= 0) {
-		this.parentElement.children[1].className = "label";
-		this.parentElement.children[0].className = this.parentElement.children[0].className + " error";
-	}
-};
-
-// --- Eventos ---
-formulario.addEventListener("submit", enviar);
-
-for (var i = 0; i < elementos.length; i++) {
-	if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
-		elementos[i].addEventListener("focus", focusInput);
-		elementos[i].addEventListener("blur", blurInput);
-	}
+        var html = `   
+        <div class="wrap">
+                    <form action="" class="formulario" name="formulario_registro" method="get">
+                        <div>
+                        <input type="text" id="nombre"  value="Nombre">
+                        <br>
+                        <input type="text" id="apellido"  value="apellido">
+                        <br>
+                        <input type="text" id="correo"  value="correo">
+                        <br>
+                        <input type="text" id="usuario"  value="usuario">
+                        <br>
+                        <input type="text" id="contrasena"  value="contrasena">
+                        <br>
+                        <input type="text" id="conrasena2"  value="contrasena2">
+                        <br>
+                        <input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
+                        <br>
+                        <input id="btn-submit" onclick="volver()" type="submit" value="Volver">
+                        </div>
+                    </form>
+                </div>
+        `;
+        document.getElementById("contenedor-formulario").innerHTML = html;
 }
-}
+
+
 function volver() {
-    var html = `<div class="wrap">
+       var html = `<div class="wrap">
     <form action="" class="formulario" name="formulario_registro" method="get">
         <div>
             
