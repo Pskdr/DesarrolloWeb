@@ -1,6 +1,7 @@
 function editarBoton() {
     
 }
+
 function eliminarBoton() {
     
 }
@@ -96,12 +97,8 @@ function buscador(params) {
     }
 }
 function agregar() {
-    if(validarPrevia()){
-        if(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == ""){
-
-            alert("Por favor, llene todos los campos")
-
-        }else{
+    if(!(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == "")){
+        if(validarPrevia(document.getElementById("correo").value)){
             if (document.getElementById("pass").value != document.getElementById("pass2").value) {
                 alert("las contraseñas no son iguales")
             } else {
@@ -114,11 +111,23 @@ function agregar() {
                 }
                 //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
                 localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+            }var usuario = {
+                nombre : document.getElementById("nombre").value,
+                apellido : document.getElementById("apellido").value,
+                usuario : document.getElementById("usuario").value,
+                correo : document.getElementById("correo").value,
+                pass : document.getElementById("pass").value
             }
+            //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
+            localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+            
+
+        }else{
+            alert("ese correo ya existe pai")
         }
 
     }else{
-        alert("Ese correo ya existe mi fai")
+        alert("Por favor, llene todos los campos")
     }
             
 
