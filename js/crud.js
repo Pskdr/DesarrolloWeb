@@ -1,3 +1,5 @@
+let listaUsuarios = []; 
+
 function editarBoton() {
     
 }
@@ -34,15 +36,15 @@ function agregarBoton() {
                         <div>
                         <input type="text" id="nombre"  placeholder="Nombre">
                         <br>
-                        <input type="text" id="apellido"  value="apellido">
+                        <input type="text" id="apellido"  placeholder="apellido">
                         <br>
-                        <input type="text" id="correo"  value="correo">
+                        <input type="text" id="correo"  placeholder="correo">
                         <br>
-                        <input type="text" id="usuario"  value="usuario">
+                        <input type="text" id="usuario"  placeholder="usuario">
                         <br>
-                        <input type="text" id="contrasena"  value="contrasena">
+                        <input type="text" id="pass"  placeholder="contrasena">
                         <br>
-                        <input type="text" id="conrasena2"  value="contrasena2">
+                        <input type="text" id="pass2"  placeholder="contrasena2">
                         <br>
                         <input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
                         <br>
@@ -72,32 +74,61 @@ function volver() {
 function buscador() {
     var html = `
     <center>
-    <input type="text" id="buscarElemento" placeholder="buscar elemento" value="elemento">
-        <button type="submit" id="btn-Editar" onclick="buscador(editar)" style="color: blue">Editar</button>
-        <button type="submit" id="btn-Eliminar" onclick="buscador("eliminar")" style="color: blue">Eliminar</button>
+    <input type="text" id="buscarElemento" placeholder="buscar elemento" placeholder="id">
+        <button type="submit" id="btn-Editar" onclick="buscadorP("editar")" style="color: blue">Editar</button>
+        <button type="submit" id="btn-Eliminar" onclick="buscadorP("eliminar")" style="color: blue">Eliminar</button>
         <br>
          <input id="btn-submit" onclick="volver()" type="submit" value="Volver">	
     </center>
     `;
     document.getElementById("contenedor-formulario").innerHTML = html
 }
-function buscador(params) {
-    if(params == "eliminar"){
-        alert("Se ha eliminado correctamente")
+function buscarExistencia() {
+    
+}
+function buscadorP(params) {
+
+    if(!(contarUsuarios() == 0)){
+
+        if(params == "eliminar"){
+            localStorage.
+            
+            alert("Se ha eliminado correctamente")
+        }else{
+            
+            
+            
+    
+        }
     }else{
-        try {
-            var usuario = localStorage.getItem(document.getElementById("buscarElemento").value)
-        } catch (error) {
-            volver();
-            alert("ingrese un usuario correcto")
+        alert("no hay usuarios")
+        volver()
+    }
+    
+}
+function buscadorUsuario(correo) {
+        var usuario
+        var contador = 0;
+        var index = true;
+        while(index){
+            try {
+                usuario = JSON.parse(localStorage.getItem(`usuario${contador}`))
+                contador++
+                if(usuario.correo == correo){
+                    return contador;
+                }
+                
+            } catch (error) {
+                index = false
+                return contador-1;
+            }
+            
         }
         
-        
-
-    }
+    
 }
 function agregar() {
-    if(!(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == "")){
+    if(!(document.getElementById("nombre").value == "" || document.getElementById("apellido").value == "" || document.getElementById("usuario").value == "" || document.getElementById("correo").value == "" || document.getElementById("pass").value == "" || document.getElementById("pass2").value == "")){
         if(validarPrevia(document.getElementById("correo").value)){
             if (document.getElementById("pass").value != document.getElementById("pass2").value) {
                 alert("las contraseñas no son iguales")
@@ -110,7 +141,8 @@ function agregar() {
                     pass : document.getElementById("pass").value
                 }
                 //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
-                localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+                listaUsuarios.push(usuario)
+                localStorage.setItem(`listaUsuarios`,JSON.stringify(listaUsuarios))
             }var usuario = {
                 nombre : document.getElementById("nombre").value,
                 apellido : document.getElementById("apellido").value,
@@ -119,7 +151,8 @@ function agregar() {
                 pass : document.getElementById("pass").value
             }
             //guardar en local sotrage 'stringify' es una casteo de objeto a JSON AL REVÉS, SERÍA JSON.parse(elobjetotipojson)
-            localStorage.setItem(`usuario${contarUsuarios()}`,JSON.stringify(usuario))
+            listaUsuarios.push(usuario)
+            localStorage.setItem(`listaUsuarios`,JSON.stringify(listaUsuarios))
             
 
         }else{
@@ -169,6 +202,7 @@ function mostrarUsuarios(){
 
 }
 function validarPrevia(correo) {
+    // esto es para verificar que no se repita el correo 
     if(contarUsuarios()==0){
         return true;
     }else{
