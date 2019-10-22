@@ -32,7 +32,7 @@ function agregarBoton() {
         <div class="wrap">
                     <form action="" class="formulario" name="formulario_registro" method="get">
                         <div>
-                        <input type="text" id="nombre"  value="Nombre">
+                        <input type="text" id="nombre"  placeholder="Nombre">
                         <br>
                         <input type="text" id="apellido"  value="apellido">
                         <br>
