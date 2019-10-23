@@ -1,3 +1,6 @@
+// cosas para arreglar 1. contadorUsuarios()(ready), validacionPrevia(), buscadorUsuario(param)
+// 
+// 
 let listaUsuarios = []; 
 
 function editarBoton() {
@@ -91,13 +94,10 @@ function buscadorP(params) {
     if(!(contarUsuarios() == 0)){
 
         if(params == "eliminar"){
-            localStorage.
+            
             
             alert("Se ha eliminado correctamente")
         }else{
-            
-            
-            
     
         }
     }else{
@@ -166,19 +166,18 @@ function agregar() {
 
 }
 function contarUsuarios() {
-    var contador = 0;
-    var index = true;
-    while(index){
-        try {
-            localStorage.getItem(`usuario${contador}`)
-            contador++
-        } catch (error) {
-            index = false
-            return contador
-        }
-        
+    
+     try {
+        var listaUsuarios = localStorage.getItem(`listaUsuarios`)
+        return listaUsuarios.length()
+            
+            
+    } catch (error) {
+        index = false
+        return 0
     }
-    return contador;
+         
+   
 }
 
 function mostrarUsuarios(){
@@ -201,27 +200,18 @@ function mostrarUsuarios(){
 
 
 }
-function validarPrevia(correo) {
-    // esto es para verificar que no se repita el correo 
-    if(contarUsuarios()==0){
-        return true;
-    }else{
-        var contador =0;
-       var index = true;
-        while(index){
-            try {
-                if(json.parse(localStorage.getItem(`usuario${contador}`)).correo == correo){
-                    return false
-                    
-                }
-                contador++
-            } catch (error) {
-                index = false
+function validarPrevia(Correo) {
+     
+    try {
+        var listaUsuarios = localStorage.getItem("Usuarios");
+        for(var i = 0; i<listaUsuarios.length(); i++){
+            if(listaUsuarios[i].correo == Correo){
                 return true
             }
-            
         }
-    }
-    
-}
+         return false
 
+     } catch (error) {
+         return false;
+     }
+}
