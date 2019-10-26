@@ -95,10 +95,9 @@ function buscadorP(params) {
 
         if(params == "eliminar"){
             
-            
             alert("Se ha eliminado correctamente")
         }else{
-    
+            alert("Se editará correctamente")
         }
     }else{
         alert("no hay usuarios")
@@ -184,18 +183,17 @@ function mostrarUsuarios(){
     if(contadorUsuarios() == 0){
         alert("No se encuentran usuarios para mostrar")
     }else{
-        var contador =0;
-        var usuarios = []
-        while(index){
-            try {
-                usuarios [contador] = json.parse(localStorage.getItem(`usuario${contador}`))
-                contador++
-            } catch (error) {
-                index = false
-                return contador
-            }
-            
+        var html = "<div> ";
+        var usuarios;
+        usuarios = localStorage.getItem("listaUsuarios")
+        for(var i = 0; i<usuarios.length(); i++){
+             html+= `<p> ${usuarios[i].correo} ${usuarios[i].nombre} </p>`
+
         }
+        html+= "</div>"
+        document.getElementById("agregar").innerHTML = html;
+
+       
     }
 
 
@@ -203,7 +201,7 @@ function mostrarUsuarios(){
 function validarPrevia(Correo) {
      
     try {
-        var listaUsuarios = localStorage.getItem("Usuarios");
+        var listaUsuarios = localStorage.getItem("listaUsuarios");
         for(var i = 0; i<listaUsuarios.length(); i++){
             if(listaUsuarios[i].correo == Correo){
                 return true
@@ -214,4 +212,5 @@ function validarPrevia(Correo) {
      } catch (error) {
          return false;
      }
+     return false;
 }
