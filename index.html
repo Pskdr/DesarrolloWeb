@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <title>Convenios UdeM</title>
 <link href="css/estilos.css" type="text/css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
+
 </head>
 
 <body>	
@@ -29,7 +34,15 @@
 				<a href="registro.html"> <button class="btn"> Registrarse </button></a>
 				
 				</center>
-    	</article>
+		</article>
+		
+				
+		<center>
+				<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+						
+				
+		</center>
+			
     </main>
 
     <footer>
@@ -70,6 +83,30 @@
 			</div>
 		</div>
 	</footer>
-		
+	<div class="script_facebook">
+			<script>
+					window.fbAsyncInit = function() {
+					  FB.init({
+						appId      : '769351680144599',
+						cookie     : true,
+						xfbml      : true,
+						version    : '{api-version}'
+					  });
+						
+					  FB.AppEvents.logPageView();   
+						
+					};
+				  
+					(function(d, s, id){
+					   var js, fjs = d.getElementsByTagName(s)[0];
+					   if (d.getElementById(id)) {return;}
+					   js = d.createElement(s); js.id = id;
+					   js.src = "https://connect.facebook.net/en_US/sdk.js";
+					   fjs.parentNode.insertBefore(js, fjs);
+					 }(document, 'script', 'facebook-jssdk'));
+				  </script>
+	</div>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v5.0&appId=769351680144599&autoLogAppEvents=1"></script>
 </body>
 </html>
