@@ -6,6 +6,7 @@ CREATE TABLE "public"."convenio"
     "nombre" varchar,
     "descripcion" text,
     "universidades" boolean,
+    "documentos" jasonb,
     "json" jsonb,
     PRIMARY KEY ("id")
 );

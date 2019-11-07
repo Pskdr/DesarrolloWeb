@@ -1,11 +1,11 @@
-const { Estudiante } = require("pg");
+const { Client } = require("pg");
 
 /**
  * Controlador para las tareas
  */
 class Requisito {
   constructor() {
-    this.miDb = new Estudiante({
+    this.miDb = new Client({
       user: "postgres",
       host: "localhost",
       database: "Convenio",
