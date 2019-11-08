@@ -1,7 +1,7 @@
 const { Client } = require("pg");
 
 /**
- * Controlador para las tareas
+ * Controlador para los requisitos
  */
 class Requisito {
   constructor() {

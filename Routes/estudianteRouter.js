@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require('../controllers/controller-estudiante')
+const User = require('../Controllers/controllers-estudiante.js')
 
 router.post('/login/', (request, response) => {
     let body = request.body

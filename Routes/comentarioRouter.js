@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TareaController = require("../controllers/requisitoController");
+const RequisitoController = require("../Controllers/ComentariosControllers.js");
 const misRequisitos = new RequisitoController();
 
 // ENRUTADO DE TAREAS
