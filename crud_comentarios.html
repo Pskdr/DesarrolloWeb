@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Comentarios</title>
+
+<link href="css/estilos.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="css/formulario.css">
+</head>
+
+<body>
+	<div class="principal"><img src="imagenes/logoUdeM.png"></div>    
+    <header class="container">        
+        <nav>
+				<a href="index.html" class="item-options">Inicio</a>
+				<a href="convenios.html" class="item-options">convenios</a>
+				<a href="documentos.html" class="item-options">Documentos</a>
+				<a href="videos.html" class="item-options">Videos</a>
+				<a href="comentarios.html" class="item-options">Comentarios</a>
+				<a href="usuarios.html" class="item-options">Crud Usuarios</a>
+		</nav>
+    </header>	
+	<!-- <main>
+		<div class="contenedor">
+			<form action="" class="form">
+				<div class="form-header">
+					<h4 class="form-title"><span>Brindanos tu opinion</span></h4>
+				</div>
+				<label for="nombre" class="form-label">Nombre:</label>
+				<input type="text" id="nombre" class="form-input" placeholder="Escriba su nombre">
+				
+				<label for="direccion" class="form-label">Direccion:</label>
+				<input type="text" id="direccion" class="form-input" placeholder="Escriba su direccion">
+				
+				<label for="correo" class="form-label">Correo:</label>
+				<input type="email" id="correo" class="form-input" placeholder="Escriba su correo">
+				
+				<label for="mensaje" class="form-label">Mensaje:</label>
+				<textarea type="text" id="mensaje" class="form-textarea" placeholder="Escriba su mensaje"></textarea>
+			
+				<input type="submit" class="btn-submit" value="Enviar Consulta">
+			</form>
+		
+		</div>
+	</main> -->
+
+	<div class="contenedor-formulario">
+			<div class="wrap">
+				<form action="" class="formulario" name="formulario_registro" method="get">
+					<div>
+						<div class="input-group">
+							<input type="text" id="nombre" name="nombre" placeholder="Nombre:">
+						</div>
+						<div class="input-group">
+							<input type="text" id="apellido" name="apellido" placeholder="Apellido:">
+						</div>
+	
+						<div class="input-group">
+							<input type="email" id="correo" name="correo" placeholder="Correo:">
+						</div>
+
+						<div class="input-group">
+							<input type="text" id="mensaje" name="mensaje" placeholder="Mensaje:">
+						</div>
+
+						<input type="submit" id="btn-submit" value="Enviar">
+					</div>
+				</form>
+			</div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="modificarGuardar()">
+            Guardar modificación
+          </button>
+        </div>
+      </form>
+    
+      <table border="1">
+        <tbody id="comentarios"></tbody>
+      </table>
+	
+	<footer>
+		<div class="footer-container">
+			<div class="footer-main">
+				<div class="footer-columna">
+					<h3>¿Deseas obtener más información sobre los convenios de la Universidad? Envianos tu correo</h3>
+					<input type="email" placeholder="Escriba su Correo">
+					<input type="submit" value="Enviar">
+				</div>
+
+				<div class="footer-columna">
+					<h3>Contactenos</h3>					
+					<span class="fa fa-phone"><p>(+57) 310 524 6021</p></span>
+					<span class="fa fa-envelope"><p>j.alexcalderon07@gmail.com</p></span>
+					<span class="fa fa-envelope"><p>x_alex_x12@hotmail.com</p></span>
+				</div>
+
+				<div class="footer-columna">
+						<h3>Sobre el aplicativo web</h3>
+						<p> Página web de la univerdiad de Medellín creada para que sus estudiantes 
+							tengan una mayor información sobre los convenios nacionales e internacionales que 
+							tiene la univerdiad
+					 </p>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-copy-redes">
+			<div class="main-copy-redes">
+				<div class="footer-copy">
+					&copy; 2019, Todos los derechos reservados 
+				</div>
+				<div class="footer-redes">
+					<a href="https://www.facebook.com/umedellin" class="fa fa-facebook" target="_blank"></a>				
+					
+				</div>
+			</div>
+		</div>
+	</footer>
+    
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script src="js/comentarios.js"></script>
+	<script src="jwt.js"></script>
+    
+</body>
+</html>

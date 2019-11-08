@@ -1,5 +1,5 @@
 // Recorrer los elementos y hacer que onchange ejecute una funcion para comprobar el valor de ese input
-(function(){
+
     // formulario y elementos del formulario
    var formulario = document.formulario_registro,
        elementos = formulario.elements;
@@ -7,8 +7,7 @@
    let comentarios = [];
    
    // Funcion que se ejecuta cuando el evento click es activado
-   
-   let validarInputs = function(){
+   function validarInputs (){
        for (var i = 0; i < elementos.length; i++) {
            // Identificamos si el elemento es de tipo texto, email, password, radio o checkbox
            if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
@@ -63,25 +62,90 @@ function obtenerDatos() {
     return comentario;
 }
 
-var focusInput = function(){
-	this.parentElement.children[1].className = "label active";
-	this.parentElement.children[0].className = this.parentElement.children[0].className.replace("error", "");
-};
-
-var blurInput = function(){
-	if (this.value <= 0) {
-		this.parentElement.children[1].className = "label";
-		this.parentElement.children[0].className = this.parentElement.children[0].className + " error";
-	}
-};
 
 // --- Eventos ---
 formulario.addEventListener("submit", enviar);
 
-for (var i = 0; i < elementos.length; i++) {
-	if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
-		elementos[i].addEventListener("focus", focusInput);
-		elementos[i].addEventListener("blur", blurInput);
-	}
+//CRUD
+let comentariosTemp = [];
+
+function crearComentario(e) {
+	let comentario = obtenerDatos();
+	let token = sessionStorage.getItem("token");
+	let options = {};
+    options.headers = { token };
+    
+    if (!validarInputs()) {
+        console.log('Falto validar los Input');
+        e.preventDefault();
+    }else {
+        console.log('Envia');
+        e.preventDefault();
+        axios
+		.post("http://localhost:3000/comentarios", comentario, options)
+		.then(response => {
+		console.log(response);
+		limpiarDatos();
+		get();
+		})
+		.catch(error => {
+		console.log(error);
+		});
+        console.log(comentarios);
+    }
 }
-}())
+
+function cargarDatos(element) {
+  document.getElementById("nombre").value = element.nombre;
+  document.getElementById('apellido').value = element.apellido;
+  document.getElementById('correo').value = element.correo;
+  document.getElementById('mensaje').value = element.mensaje;
+}
+
+function limpiarDatos() {
+  document.getElementById("nombre").value = "";
+  document.getElementById('apellido').value = "";
+  document.getElementById('mensaje').value = "";
+  document.getElementById('correo').value = "";
+}
+
+function modificar(id) {
+let comentario = comentariosTemp.find(x => x.id == id);
+cargarDatos(comentario);
+}
+
+function eliminar(id) {
+let token = sessionStorage.getItem("token");
+let options = {};
+options.headers = { token };
+axios
+  .delete("http://localhost:3000/comentarios/" + id, options)
+  .then(response => {
+    console.log(response);
+    limpiarDatos();
+    get();
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+function modificarGuardar() {
+let id = document.getElementById("id").value;
+let nuevoComentario= obtenerDatos();
+let token = sessionStorage.getItem("token");
+let options = {};
+options.headers = { token };
+axios
+  .put("http://localhost:3000/comentarios/" + id, nuevoComentario, options)
+  .then(response => {
+    console.log(response);
+    limpiarDatos();
+    get();
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+get()

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const ComentariosController = require("../controllers/Controller");
+const ComentariosController = require("../controllers/comentariosController");
 const Comentarios1 = new ComentariosController();
 
 // ENRUTADO DE TAREAS

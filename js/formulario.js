@@ -163,7 +163,7 @@ function get() {
       let data = response.data;
       let usuarios = data.informacion;
       usuariosTemp = usuarios;
-      let tbody = document.getElementById("tareas");
+      let tbody = document.getElementById("usuarios");
       tbody.innerHTML = "";
       for (let index = 0; index < tareas.length; index++) {
         let element = tareas[index];
@@ -192,8 +192,8 @@ function get() {
     });
 }
 
-function crearTarea(e) {
-	let tarea = obtenerDatos();
+function crearUsuario(e) {
+	let usuario = obtenerDatos();
 	let token = sessionStorage.getItem("token");
 	let options = {};
 	options.headers = { token };
@@ -211,7 +211,7 @@ function crearTarea(e) {
 		console.log('Envia');
 		e.preventDefault();
 		axios
-		.post("http://localhost:3000/tareas", tarea, options)
+		.post("http://localhost:3000/usuarios", usuario, options)
 		.then(response => {
 		console.log(response);
 		limpiarDatos();
@@ -224,19 +224,21 @@ function crearTarea(e) {
 }
 
 function cargarDatos(element) {
-  document.getElementById("id").value = element.id;
-  document.getElementById("nombre").value = element.nombre;
-  document.getElementById("descripcion").value = element.descripcion;
-  document.getElementById("estado").value = element.estado;
-  document.getElementById("fecha").value = new Date(element.fecha);
+  	document.getElementById("nombre").value = element.nombre;
+	document.getElementById('apellido').value = element.apellido;
+    document.getElementById('usuario').value = element.usuario;
+    document.getElementById('correo').value = element.correo;
+    document.getElementById('pass').value = element.pass;
+    document.getElementById('pass2').value = element.pass;
 }
 
 function limpiarDatos() {
-  document.getElementById("id").value = "";
-  document.getElementById("nombre").value = "";
-  document.getElementById("descripcion").value = "";
-  document.getElementById("estado").value = "";
-  document.getElementById("fecha").value = "";
+	document.getElementById("nombre").value = "";
+	document.getElementById('apellido').value = "";
+    document.getElementById('usuario').value = "";
+    document.getElementById('correo').value = "";
+    document.getElementById('pass').value = "";
+    document.getElementById('pass2').value = "";
 }
 
 function modificar(id) {
