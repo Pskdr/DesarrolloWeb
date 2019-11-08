@@ -15,6 +15,7 @@ app.use(cors());
 //Rutas públicas
 app.use("/", rutasPublicas);
 
+
 // Middleware
 app.use("/", (request, response, next) => {
   try {

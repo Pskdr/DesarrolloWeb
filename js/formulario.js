@@ -126,32 +126,31 @@ function obtenerDatos() {
     return registro
 }
 
-var focusInput = function(){
-	this.parentElement.children[1].className = "label active";
-	this.parentElement.children[0].className = this.parentElement.children[0].className.replace("error", "");
-};
+// var focusInput = function(){
+// 	this.parentElement.children[1].className = "label active";
+// 	this.parentElement.children[0].className = this.parentElement.children[0].className.replace("error", "");
+// };
 
-var blurInput = function(){
-	if (this.value <= 0) {
-		this.parentElement.children[1].className = "label";
-		this.parentElement.children[0].className = this.parentElement.children[0].className + " error";
-	}
-};
+// var blurInput = function(){
+// 	if (this.value <= 0) {
+// 		this.parentElement.children[1].className = "label";
+// 		this.parentElement.children[0].className = this.parentElement.children[0].className + " error";
+// 	}
+// };
 
 // --- Eventos ---
 formulario.addEventListener("submit", enviar);
 
-for (var i = 0; i < elementos.length; i++) {
-	if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
-		elementos[i].addEventListener("focus", focusInput);
-		elementos[i].addEventListener("blur", blurInput);
-	}
-}
-
+// for (var i = 0; i < elementos.length; i++) {
+// 	if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
+// 		elementos[i].addEventListener("focus", focusInput);
+// 		elementos[i].addEventListener("blur", blurInput);
+// 	}
+// }
 
 
 // CRUD
-let tareasTemp = [];
+let usuariosTemp = [];
 
 //Obtener datos
 function get() {
@@ -162,8 +161,8 @@ function get() {
     .get("http://localhost:3000/usuarios", options)
     .then(response => {
       let data = response.data;
-      let tareas = data.informacion;
-      tareasTemp = tareas;
+      let usuarios = data.informacion;
+      usuariosTemp = usuarios;
       let tbody = document.getElementById("tareas");
       tbody.innerHTML = "";
       for (let index = 0; index < tareas.length; index++) {
@@ -172,8 +171,10 @@ function get() {
         row += "<tr>";
         row += "<td>" + element["id"] + "</td>";
         row += "<td>" + element["nombre"] + "</td>";
-        row += "<td>" + element["estado"] + "</td>";
-        row += "<td>" + element["fecha"] + "</td>";
+        row += "<td>" + element["apellido"] + "</td>";
+        row += "<td>" + element["correo"] + "</td>";
+        row += "<td>" + element["usuario"] + "</td>";
+        row += "<td>" + element["pass"] + "</td>";
         row +=
           "<td><button onclick='modificar(" +
           element["id"] +
@@ -239,8 +240,8 @@ function limpiarDatos() {
 }
 
 function modificar(id) {
-  let tarea = tareasTemp.find(x => x.id == id);
-  cargarDatos(tarea);
+  let usuario = usuariosTemp.find(x => x.id == id);
+  cargarDatos(usuario);
 }
 
 function eliminar(id) {
@@ -248,7 +249,7 @@ function eliminar(id) {
   let options = {};
   options.headers = { token };
   axios
-    .delete("http://localhost:3000/tareas/" + id, options)
+    .delete("http://localhost:3000/usuarios/" + id, options)
     .then(response => {
       console.log(response);
       limpiarDatos();
@@ -261,12 +262,12 @@ function eliminar(id) {
 
 function modificarGuardar() {
   let id = document.getElementById("id").value;
-  let nuevaTarea = obtenerDatos();
+  let nuevoUsuario = obtenerDatos();
   let token = sessionStorage.getItem("token");
   let options = {};
   options.headers = { token };
   axios
-    .put("http://localhost:3000/tareas/" + id, nuevaTarea, options)
+    .put("http://localhost:3000/usuarios/" + id, nuevoUsuario, options)
     .then(response => {
       console.log(response);
       limpiarDatos();
@@ -276,3 +277,5 @@ function modificarGuardar() {
       console.log(error);
     });
 }
+
+get()

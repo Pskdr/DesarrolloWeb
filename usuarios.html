@@ -8,12 +8,8 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
-	<div id="fb-root"></div>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v4.0"></script>
-
-
-
 	<link rel="stylesheet" href="css/formulario.css">
 	<link href="css/estilos.css" type="text/css" rel="stylesheet">
 </head>
@@ -27,31 +23,68 @@
 			<a href="documentos.html" class="item-options">Documentos</a>
 			<a href="videos.html" class="item-options">Videos</a>
             <a href="comentarios.html" class="item-options">Comentarios</a>
-            <a href="crud.html" class="item-options">Crud Usuarios</a>
+            <a href="usuarios.html" class="item-options">Crud Usuarios</a>
             
 		</nav>
     </header>	
 	
 
-    <div class="contenedor-formulario" id="contenedor-formulario">
+    <div class="contenedor-formulario">
 		<div class="wrap">
 			<form action="" class="formulario" name="formulario_registro" method="get">
 				<div>
-					
-					<input type="submit" id="btn-Agregar" onclick="agregarBoton()" value="Agregar">
-                    <input type="submit" id="btn-Editar" onclick="buscador()" value="Editar/Eliminar">
-                    
-                    <input type="submit" id="btn-Mostrar" onclick="mostrarBoton()" value="Mostrar">
+					<div class="input-group">
+						<input type="text" id="nombre" name="nombre">
+						<label class="label" for="nombre">Nombre:</label>
+					</div>
+					<div class="input-group">
+						<input type="text" id="apellido" name="apellido">
+						<label class="label" for="apellido">Apellido:</label>
+					</div>
+
+					<div class="input-group">
+						<input type="text" id="usuario" name="usuario">
+						<label class="label" for="usuario">Nombre De Usario:</label>
+					</div>
+					<div class="input-group">
+						<input type="email" id="correo" name="correo">
+						<label class="label" for="correo">Correo:</label>
+					</div>
+
+					<div class="input-group">
+						<input type="password" id="pass" name="pass">
+						<label class="label" for="pass">Contraseña:</label>
+					</div>
+					<div class="input-group">
+						<input type="password" id="pass2" name="pass2">
+						<label class="label" for="pass2">Repetir Contraseña:</label>
+					</div>
+					<div class="input-group radio">
+						<input type="radio" name="sexo" id="hombre" value="Hombre">
+						<label for="hombre">Hombre</label>
+						<input type="radio" name="sexo" id="mujer" value="Mujer">
+						<label for="mujer">Mujer</label>
+					</div>
+					<div class="input-group checkbox">
+						<input type="checkbox" name="terminos" id="terminos" value="true">
+						<label for="terminos">Acepto los Terminos y Condiciones</label>
+					</div>
+						
+					<input type="submit" id="btn-submit" onclick="agregar()" value="Enviar">
 				</div>
-			</form>
+			</form>		
 		</div>
 	</div>
-	<div class="contenedor" id="agregar">
-		<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
-	
 
+	<button class="btn btn-primary" onclick="modificarGuardar()">
+		Guardar modificación
+	  </button>
 	</div>
+  </form>
 
+  <table border="1">
+	<tbody id="tareas"></tbody>
+  </table>
 		
 	
 	<footer>
@@ -92,8 +125,21 @@
 				</div>
 			</div>
 		</footer>
+
+	
+		<script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
     
-    <script src="js/formulario.js"></script>
+	<script src="js/formulario.js"></script>
+	<script src="jwt.js"></script>
 </body>
 </html>
 
