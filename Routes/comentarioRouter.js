@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const RequisitoController = require("../Controllers/ComentariosControllers.js");
+const RequisitoController = require("../Controllers/ConvenioControllers.js/index.js");
 const misRequisitos = new RequisitoController();
 
 // ENRUTADO DE TAREAS

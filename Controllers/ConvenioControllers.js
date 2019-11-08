@@ -1,9 +1,9 @@
 const { Client } = require("pg");
 
 /**
- * Controlador para los requisitos
+ * Controlador para los Convenios
  */
-class Requisito {
+class Convenio {
   constructor() {
     this.miDb = new Client({
       user: "postgres",
@@ -25,29 +25,29 @@ class Requisito {
     await this.miDb.connect();
   }
 
-  async obtenerRequisito() {
-    let query = "SELECT * FROM requisito";
+  async obtenerConvenio() {
+    let query = "SELECT * FROM Convenio";
     let respuesta = await this.miDb.query(query);
     return respuesta.rows;
   }
 
-  async agregarRequisito(requisito) {
-    let query = `INSERT INTO public.requisito(
+  async agregarConvenio(Convenio) {
+    let query = `INSERT INTO public.Convenio(
              id,nombre, descripcion, convenios, json)
-            VALUES ('${requisito.nombre}', '${requisito.descripcion}', '${
-      requisito.id
+            VALUES ('${Convenio.nombre}', '${Convenio.descripcion}', '${
+      Convenio.id
     }', 
-                ${requisito.convenio}, '${JSON.stringify(requisito)}');`;
+                ${Convenio.convenio}, '${JSON.stringify(Convenio)}');`;
     let respuesta = await this.miDb.query(query);
     return respuesta;
   }
 
-  async modificarRequisito(id, requisito) {
-    let query = `UPDATE public.requisito
-        SET  nombre='${requisito.nombre}', descripcion='${
-      requisito.descripcion
-    }', id='${requisito.id}',
-         convenio=${requisito.convenio}, json='${JSON.stringify(requisito)}'
+  async modificarConvenio(id, Convenio) {
+    let query = `UPDATE public.Convenio
+        SET  nombre='${Convenio.nombre}', descripcion='${
+      Convenio.descripcion
+    }', id='${Convenio.id}',
+         convenio=${Convenio.convenio}, json='${JSON.stringify(Convenio)}'
         WHERE id=${id}`;
     let respuesta = await this.miDb.query(query);
     return respuesta;
@@ -57,11 +57,11 @@ class Requisito {
    *
    * @param {*} id
    */
-  async eliminarRequisito(id) {
-    let query = `DELETE FROM requisitos WHERE id=${id}`;
+  async eliminarConvenio(id) {
+    let query = `DELETE FROM Convenios WHERE id=${id}`;
     let respuesta = await this.miDb.query(query);
     return respuesta;
   }
 }
 
-module.exports = Requisito;
+module.exports = Convenio;
