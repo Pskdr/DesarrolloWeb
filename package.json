@@ -1,7 +1,7 @@
 {
   "name": "convenios",
   "version": "1.0.0",
-  "description": "",
+  
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.0",
@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/Pskdr/DesarrolloWeb/issues"
   },
-  "homepage": "https://github.com/Pskdr/DesarrolloWeb#readme"
+  "homepage": "https://github.com/Pskdr/DesarrolloWeb#readme",
+  "description": "proyecto de web"
 }
