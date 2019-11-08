@@ -7,11 +7,9 @@
     <title>Inicio sesion</title>
 
 	<link rel="stylesheet" href="css/formulario.css">
-	<link href="css/estilos.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="js/crud.js"></script>
-
-		
+	<link href="css/estilos.css" type="text/css" rel="stylesheet">		
 </head>
+
 <body>
 	<div class="principal"><img src="imagenes/logoUdeM.png"></div>    
     <header class="container">        
@@ -28,31 +26,21 @@
 	<div class="contenedor-formulario">
 		<center>
 		<h1 id="tituloInicio">Inico de sesión</h1>
-		<form method="post" onsubmit="return validar();" >
+		<form method="post" onsubmit="" >
 			
-			<input type="text" name="txtUsuario" id="txtUsuario" placeholder="Usuario" required="required" />
+			<input type="text" name="txtUsuario" id="usuario" placeholder="Usuario" required="required" />
 			<br>
-			<input type="password" name="txtContrasena" id="txtContrasena" placeholder="Contraseña" required="required" />
+			<input type="password" name="txtContrasena" id="clave" placeholder="Contraseña" required="required" />
 			<br>
-			<input type="submit" value="Ingresar" class="btn" onclick="inicioSesion(txtUsuario.value, txtContrasena.value)"/>
+			<input type="submit" value="Ingresar" class="btn" onsubmit="login()"/>
 			<br>
-			<a href="registro.html"><input type="submit" value="Registrarse" class="btn"/></a>
-			<!--<button type="submit" class="btn btn-primary btn-block btn-large">Ingresar</button>-->
+			<a href="registro.html"><input value="Registrarse" class="btn"/></a>
 		
 	    </form>
 		<p id="respuesta"></p>
 		</center>
 	</div>
 	
-	<div class="todolodefacebook">
-		<fb:login-button 
-		scope="public_profile,email"
-		onlogin="checkLoginState();">
-		</fb:login-button>
-
-	</div>
-	
-
 	<footer>
 			<div class="footer-container">
 				<div class="footer-main">
@@ -91,6 +79,6 @@
 				</div>
 			</div>
 		</footer>
-		
+		<script src="js/login.js"></script>
 </body>
 </html>

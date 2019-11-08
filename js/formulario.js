@@ -1,5 +1,6 @@
+//VALIDACION
 // Recorrer los elementos y hacer que onchange ejecute una funcion para comprobar el valor de ese input
-(function(){
+
  // formulario y elementos del formulario
 var formulario = document.formulario_registro,
 	elementos = formulario.elements;
@@ -8,7 +9,7 @@ let registros = [];
 
 // Funcion que se ejecuta cuando el evento click es activado
 
-var validarInputs = function(){
+function validarInputs(){
 	for (var i = 0; i < elementos.length; i++) {
 		// Identificamos si el elemento es de tipo texto, email, password, radio o checkbox
 		if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
@@ -37,7 +38,7 @@ var validarInputs = function(){
 	return true;
 };
 
-var validarRadios = function(){
+function validarRadios(){
 	var opciones = document.getElementsByName('sexo'),
 		resultado = false;
 
@@ -64,7 +65,7 @@ var validarRadios = function(){
 	}
 };
 
-var validarCheckbox = function(){
+function validarCheckbox(){
 	var opciones = document.getElementsByName('terminos'),
 		resultado = false;
 
@@ -90,25 +91,6 @@ var validarCheckbox = function(){
 	}
 };
 
-var enviar = function(e){
-	if (!validarInputs()) {
-		console.log('Falto validar los Input');
-		e.preventDefault();
-	} else if (!validarRadios()) {
-		console.log('Falto validar los Radio Button');
-		e.preventDefault();
-	} else if (!validarCheckbox()) {
-		console.log('Falto validar Checkbox');
-		e.preventDefault();
-	} else {
-		console.log('Envia');
-		e.preventDefault();
-		let registro = obtenerDatos();
-		registros.push(registro)
-        localStorage.setItem("lista_automotores", JSON.stringify(registros))
-		console.log(registros);
-	}
-};
 
 // Agregar todos los campos al nuevo registro
 function obtenerDatos() {
@@ -168,19 +150,129 @@ for (var i = 0; i < elementos.length; i++) {
 
 
 
-}())
+// CRUD
+let tareasTemp = [];
 
-function inicioSesion(usuario, contrasena) {
-	for (let i = 0; i < registros.length; i++) {
-		
-		if (usuario == registros[i].usuario) {
-			if (contrasena == registros[i].usuario){
-				alert('Has iniciado sesión correctamente');
-				break;
-			}else{
-				alert('Usuario o contraseña incorrectos');
-			}
-		}
-	}	
+//Obtener datos
+function get() {
+  let token = sessionStorage.getItem("token");
+  let options = {};
+  options.headers = { token };
+  axios
+    .get("http://localhost:3000/usuarios", options)
+    .then(response => {
+      let data = response.data;
+      let tareas = data.informacion;
+      tareasTemp = tareas;
+      let tbody = document.getElementById("tareas");
+      tbody.innerHTML = "";
+      for (let index = 0; index < tareas.length; index++) {
+        let element = tareas[index];
+        let row = "";
+        row += "<tr>";
+        row += "<td>" + element["id"] + "</td>";
+        row += "<td>" + element["nombre"] + "</td>";
+        row += "<td>" + element["estado"] + "</td>";
+        row += "<td>" + element["fecha"] + "</td>";
+        row +=
+          "<td><button onclick='modificar(" +
+          element["id"] +
+          ")'> Modificar </button> </td>";
+        row +=
+          "<td><button onclick='eliminar(" +
+          element["id"] +
+          ")'> Eliminar </button> </td>";
+        row += "</tr>";
+        tbody.innerHTML += row;
+      }
+    })
+    .catch(error => {
+      console.log(error.toString());
+    });
 }
 
+function crearTarea(e) {
+	let tarea = obtenerDatos();
+	let token = sessionStorage.getItem("token");
+	let options = {};
+	options.headers = { token };
+
+	if (!validarInputs()) {
+		console.log('Falto validar los Input');
+		e.preventDefault();
+	} else if (!validarRadios()) {
+		console.log('Falto validar los Radio Button');
+		e.preventDefault();
+	} else if (!validarCheckbox()) {
+		console.log('Falto validar Checkbox');
+		e.preventDefault();
+	} else {
+		console.log('Envia');
+		e.preventDefault();
+		axios
+		.post("http://localhost:3000/tareas", tarea, options)
+		.then(response => {
+		console.log(response);
+		limpiarDatos();
+		get();
+		})
+		.catch(error => {
+		console.log(error);
+		});
+	}  
+}
+
+function cargarDatos(element) {
+  document.getElementById("id").value = element.id;
+  document.getElementById("nombre").value = element.nombre;
+  document.getElementById("descripcion").value = element.descripcion;
+  document.getElementById("estado").value = element.estado;
+  document.getElementById("fecha").value = new Date(element.fecha);
+}
+
+function limpiarDatos() {
+  document.getElementById("id").value = "";
+  document.getElementById("nombre").value = "";
+  document.getElementById("descripcion").value = "";
+  document.getElementById("estado").value = "";
+  document.getElementById("fecha").value = "";
+}
+
+function modificar(id) {
+  let tarea = tareasTemp.find(x => x.id == id);
+  cargarDatos(tarea);
+}
+
+function eliminar(id) {
+  let token = sessionStorage.getItem("token");
+  let options = {};
+  options.headers = { token };
+  axios
+    .delete("http://localhost:3000/tareas/" + id, options)
+    .then(response => {
+      console.log(response);
+      limpiarDatos();
+      get();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+function modificarGuardar() {
+  let id = document.getElementById("id").value;
+  let nuevaTarea = obtenerDatos();
+  let token = sessionStorage.getItem("token");
+  let options = {};
+  options.headers = { token };
+  axios
+    .put("http://localhost:3000/tareas/" + id, nuevaTarea, options)
+    .then(response => {
+      console.log(response);
+      limpiarDatos();
+      get();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
